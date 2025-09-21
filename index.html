@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>分手复合综合心理评估量表 BRI-90</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 首页界面 -->
+    <div id="homepage" class="page active">
+        <div class="container">
+            <div class="header">
+                <h1>分手复合综合心理评估量表 BRI-90</h1>
+                <div class="subtitle">分手复合心理状态综合评估</div>
+            </div>
+            
+            <div class="description">
+                <p>分手复合综合心理评估量表（Breakup Reconciliation Inventory-90, BRI-90）是用于全面评估个体在经历亲密关系破裂后，其情感、认知、行为及身心反应的综合自评量表。本量表共有90个项目，包含广泛的心理症状与适应性指标，从情感依恋、自我认知、人际信任、行为冲动、身心症状、未来展望等多个维度，深入考察个体是否具备复合的心理条件。</p>
+                <p>本测验的目的是从情绪状态、思维模式、行为倾向、躯体反应、社会功能及关系认知等多种角度，全面评定一个人在当前阶段对于复合的心理准备程度、潜在的心理困扰及其严重程度。测试结果仅供参考，不代表实际诊断。</p>
+
+                <div class="instructions">
+                    <h3>测试说明：</h3>
+                    <p>请仔细阅读以下每一条陈述，并根据您最近一个星期内的实际感受，选择最适合的答案。</p>
+                    <p>评分标准：1-没有、2-很轻、3-中等、4-偏重、5-严重</p>
+                </div>
+            </div>
+            
+            <div class="start-section" id="startSection">
+                <button id="startBtn" class="start-btn">开始测试</button>
+                <div id="timeLimit" class="time-limit-msg" style="display: none;">
+                    <p>您已超过24小时访问限制，无法进行测试。</p>
+                </div>
+            </div>
+
+            <!-- 答题部分（初始隐藏） -->
+            <div id="questionSection" style="display: none;">
+                <div class="progress-info">
+                    <span id="currentQuestion">1</span> / <span id="totalQuestions">90</span>
+                    <div class="progress-bar">
+                        <div id="progressFill" class="progress-fill"></div>
+                    </div>
+                </div>
+                
+                <div class="question-section">
+                    <div class="question-number">第 <span id="questionNum">1</span> 题</div>
+                    <div class="question-text" id="questionText">我情不自禁地反复回想我们在一起的美好时光。</div>
+                    
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="answer" value="1">
+                            <span class="option-text">1 - 没有</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="answer" value="2">
+                            <span class="option-text">2 - 很轻</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="answer" value="3">
+                            <span class="option-text">3 - 中等</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="answer" value="4">
+                            <span class="option-text">4 - 偏重</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="answer" value="5">
+                            <span class="option-text">5 - 严重</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="navigation">
+                    <button id="prevBtn" class="nav-btn" disabled>上一题</button>
+                    <button id="nextBtn" class="nav-btn">下一题</button>
+                    <button id="submitBtn" class="submit-btn" style="display: none;">提交测试</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 评分界面 -->
+    <div id="resultpage" class="page">
+        <div class="result-container">
+            <!-- 顶部标题区域 -->
+            <div class="result-title-section">
+                <h1>BRI-90分手复合综合心理评估量表</h1>
+                <p class="result-subtitle">测试结果仅供参考，不作诊断使用</p>
+            </div>
+
+            <!-- 总分显示区域 -->
+            <div class="total-score-section">
+                <div class="score-label">您的BRI-90总分</div>
+                <div class="total-score" id="totalScoreDisplay">0</div>
+                <div class="average-score">总症状指数（GSI）：<span id="averageScoreDisplay">0.00</span></div>
+            </div>
+
+            <!-- 各因子得分表格 -->
+            <div class="factor-table-section">
+                <h3>各因子分数及测试情况</h3>
+                <table class="factor-table">
+                    <thead>
+                        <tr>
+                            <th>因子名称</th>
+                            <th>总分</th>
+                            <th>平均分</th>
+                            <th>测试情况</th>
+                        </tr>
+                    </thead>
+                    <tbody id="factorTableBody">
+                        <!-- 动态生成内容 -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 因子解释说明 -->
+            <div class="factor-explanations" id="factorExplanations">
+                <!-- 动态生成内容 -->
+            </div>
+
+            <!-- 结果解释部分 -->
+            <div class="result-interpretation">
+                <h3>结果解释</h3>
+                <div class="interpretation-content">
+                    <p>BRI-90分手复合综合心理评估量表能全面评估个体在分手后与复合决策相关的复杂心理状态。它不仅评估复合意愿的强度，更着重分析其背后的情感健康度、理性程度、应对方式及潜在风险。</p>
+                    <p>本量表的最终目的并非简单地给出"能"或"不能"复合的二元结论，而是评估当前状态下复合的潜在可能性及其健康程度。测试结果仅供参考，不代表实际诊断。</p>
+                    <p>复合是一项重大的关系决策，不应仅仅基于一时的情感冲动。请务必综合考虑所有因子的得分情况，关注自我成长，解决根本问题。</p>
+                    <p>如果您发现多个因子得分偏高，自己难以厘清，或与伴侣的沟通陷入僵局，强烈建议寻求专业心理咨询师或关系顾问的帮助。</p>
+                    <p>无论量表评估结果如何，最终的决定权在您手中。量表的目的是帮助您更清晰、更全面地了解自己，而不是代替您做决定。请尊重自己的感受和思考后的选择。</p>
+
+                    <div class="score-ranges">
+                        <h4>总症状指数（GSI）分级标准：</h4>
+                        <div class="score-range-item">
+                            <span class="range-tag normal">理性基础</span>
+                            <span class="range-text">0-1.5分，情绪较为平稳，受分手影响较小，具备理性决策基础</span>
+                        </div>
+                        <div class="score-range-item">
+                            <span class="range-tag mild">矛盾期</span>
+                            <span class="range-text">1.5-2.5分，中等程度困扰，处于悲伤和矛盾期，决策可能受情绪影响</span>
+                        </div>
+                        <div class="score-range-item">
+                            <span class="range-tag moderate">高风险期</span>
+                            <span class="range-text">2.5-3.5分，情绪困扰严重，被强烈情绪主导，重大决策风险较高</span>
+                        </div>
+                        <div class="score-range-item">
+                            <span class="range-tag severe">危机期</span>
+                            <span class="range-text">3.5-4.0分，极度痛苦，身心严重影响，首要任务是自我关怀和调适</span>
+                        </div>
+                    </div>
+
+                    <div class="total-score-interpretation">
+                        <h4>总分解释：</h4>
+                        <div class="score-range-item">
+                            <span class="range-tag normal">较低倾向</span>
+                            <span class="range-text">90-180分：复合倾向较低。你可能已从上一段关系中走出，或认为复合并非最佳选择。建议关注自我成长和新生活。</span>
+                        </div>
+                        <div class="score-range-item">
+                            <span class="range-tag mild">中等倾向</span>
+                            <span class="range-text">181-269分：复合倾向中等。你对前任和关系仍有感情和思考，但处于矛盾和观望中。需要进一步厘清自己的需求、对方的意愿以及解决问题的现实路径。</span>
+                        </div>
+                        <div class="score-range-item">
+                            <span class="range-tag moderate">较高倾向</span>
+                            <span class="range-text">270-350分：复合倾向较高。你对前任有深厚的情感联结，有较强的复合意愿，并可能感知到对方的积极反馈。建议在充分沟通、共同规划未来的基础上谨慎推进。</span>
+                        </div>
+                        <div class="score-range-item">
+                            <span class="range-tag severe">非常高倾向</span>
+                            <span class="range-text">351-450分：复合倾向非常高。你的情感、认知、行为和环境评估都强烈指向复合。需要注意区分健康的复合意愿与可能的不健康依恋（如过度依赖、恐惧分离）。确保决定是建立在理性思考和相互尊重的基础上。</span>
+                        </div>
+                    </div>
+
+                    <p class="disclaimer">如果您的总症状指数超过2.5分，或多个因子得分较高，建议寻求专业心理咨询师的帮助。复合决策需要在情绪稳定、思维清晰的状态下进行，切勿在情绪激动时做出重大决定。<br>如果分手后想复合，又不知道怎么做，可<span class="highlight-contact">添加微信【T84853】免费咨询</span></p>
+                </div>
+            </div>
+
+            <!-- 公众号二维码 -->
+            <div class="result-qr-section">
+                <div class="result-qr-container">
+                    <img src="images/1.jpg" alt="公众号二维码" class="result-qr-img">
+                    <p class="result-qr-text">如果想复合又不知道怎么做，可以截图此二维码微信扫码关注公众号「或者直接搜索【情感解忧馆】」里面有很多复合小知识，还可以免费咨询！</p>
+                </div>
+            </div>
+
+            <!-- 重新测试按钮 -->
+            <div class="result-actions">
+                <button id="restartBtn" class="restart-btn">重新测试</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
